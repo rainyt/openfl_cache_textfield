@@ -11,8 +11,9 @@ class Main extends Sprite {
 		stage.color = 0x666666;
 
 		// DEBUG
-		// var bitmap = new Bitmap(Label.textFieldCacheBitmapData.bitmapData);
-		// this.addChild(bitmap);
+		var bitmap = new Bitmap(Label.textFieldCacheBitmapData.bitmapData);
+		this.addChild(bitmap);
+		bitmap.scaleX = bitmap.scaleY = 0.5;
 
 		var labels:Array<Label> = [];
 
@@ -21,6 +22,9 @@ class Main extends Sprite {
 			var label = new Label();
 			this.addChild(label);
 			label.text = "";
+			// Use TextField
+			// label.mode = TEXTFIELD;
+			// Use Tilemap
 			label.mode = CACHE;
 			label.x = Std.random(Std.int(stage.stageWidth));
 			label.y = Std.random(Std.int(stage.stageHeight));

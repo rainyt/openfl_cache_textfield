@@ -1,5 +1,6 @@
 package openfl.text;
 
+import openfl.events.Event;
 import openfl.geom.ColorTransform;
 import openfl.display.Sprite;
 
@@ -21,6 +22,11 @@ class Label extends Sprite {
 	 * Tilemap渲染器
 	 */
 	private var __tilemap:TilemapLabel;
+
+	/**
+	 * 渲染版本
+	 */
+	private var __version:Int = 0;
 
 	/**
 	 * 是否发生变更
@@ -84,6 +90,14 @@ class Label extends Sprite {
 		__textField.selectable = false;
 		__tilemap = new TilemapLabel(textFieldCacheBitmapData.getAtlas());
 		__tilemap.wordWrap = true;
+		this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+	}
+
+	private function onAddedToStage(e:Event):Void {
+		if (__version != textFieldCacheBitmapData.version) {
+			__version = textFieldCacheBitmapData.version;
+			this.invalidate();
+		}
 	}
 
 	/**
